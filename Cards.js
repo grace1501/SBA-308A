@@ -19,10 +19,10 @@
 
 const testUser = {
         "id": 1,
-        "email": "george.bluth@reqres.in",
-        "first_name": "George",
-        "last_name": "Bluth",
-        "avatar": "https://reqres.in/img/faces/1-image.jpg",
+        "email": "mike.doe@reqres.in",
+        "first_name": "Mike",
+        "last_name": "Doe",
+        "avatar": "https://eu.ui-avatars.com/api/?name=Mike+Doe&size=128",
         "favQuote": {
             author: 'Douglas Crockford', 
             quote: 'JavaScript, purely by accident, has become the most popular programming language in the world.'
