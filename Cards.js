@@ -32,7 +32,7 @@ const testUser = {
 
 const usersDisplay = document.getElementById("users-display");
 
-function createNewCard(userObj) {
+export function createNewCard(userObj) {
 
     if (!userObj.avatar) {
         userObj.avatar = `https://eu.ui-avatars.com/api/?name=${userObj.first_name}+${userObj.last_name}&size=128`
