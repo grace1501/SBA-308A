@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+
+    <script defer type ="text/javascript" src="Card.js"></script>
+    <script defer type ="text/javascript" src="./index.js"></script>
+
+</head>
+<body>
+    <h1>Developers Hub</h1>
+    <p>Where developers and friends can connect and share their favorite quotes about programming</p>
+
+    <!-- REGISTRATION FORM -->
+    <div id="register-form" class="form-container">
+        <h2>Register here</h2>
+        <br>
+        <form>
+            <label for="first-name">First name</label>
+            <input type="text" name="first-name" id="first-name" required minlength="1" maxlength="100">
+            <br>
+            <br>
+            <label for="last-name">Last name</label>
+            <input type="text" name="last-name" id="last-name" required minlength="1" maxlength="100">
+            <br>
+            <br>
+            <label for="email">Email address</label>
+            <input type="email" name="email" id="email">
+            <br>
+            <br>
+            <label for="quote">Favorite quote</label>
+            <textarea rows="5" name="quotes" id="quotes" placeholder="Your favorite programming quote - You can make up one - or we will do it!"></textarea>
+            <br>
+            <br>
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author">
+            
+            
+            <div>
+                <input type="submit" value="Join our hub" class="button">
+            </div>
+            
+        </form>
+    </div>
+
+    <div id="users-display" class="display-style">
+        <div>
+            <div class="card">
+                <h4>User Name</h4>
+                <img src="https://eu.ui-avatars.com/api/?name=John+Doe&size=128" alt="User avatar">
+                <p>Email address</p>
+                <q>Quote line</q>
+                <p>Quote author</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SAMPLE CARD -->
+    <!-- I used https://ui-avatars.com/ to creat personalized avatar based on user's name -->
+
+    <template>
+
+    </template>
+
+</body>
+</html>
