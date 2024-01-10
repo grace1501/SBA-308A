@@ -4,7 +4,10 @@
 
 import * as Quotes from './Quotes.js';
 import * as Cards from './Cards.js';
-import * as Form from './Form.js';
+import './Form.js';
+
+// This will fill the page with content when first loaded
+loadPage();
 
 ////////////////////////////
 // GET METHOD
@@ -16,8 +19,9 @@ async function getUserArr() {
     return resjson.data;
 }
 
-// get array of quotes to assign to each user object favQuote
-Quotes.getTenQuotes().then((quotesArr) => {
+function loadPage() {
+    // get array of quotes to assign to each user object favQuote
+    Quotes.getTenQuotes().then((quotesArr) => {
 
     // get array of user data, then add the quote to each user
     getUserArr().then((userArr) => {
@@ -31,19 +35,79 @@ Quotes.getTenQuotes().then((quotesArr) => {
     });
 
     })
-})
-.catch((err) => {
-    console.log(err);
-})
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}
 
 
 
 ///////////////////////////////////
 // POST METHOD
 
+// Gather all data from the form elements
+const form = document.querySelector('form');
+console.log(form.elements);
+
+const firstName = form.elements['first-name'];
+const lastName = form.elements['last-name'];
+const email = form.elements['email'];
+const quote = form.elements['quote'];
+const author = form.elements['author'];
+
+
+function addNewUser(e) {
+    e.preventDefault();
+    console.log('running');
+    
+    const newUser = {
+        "email": email.value,
+        "first_name": firstName.value,
+        "last_name": lastName.value,
+    }
+
+    if (quote.value.length < 0) {
+        console.log('No favorite quote - will get you one')
+        Quotes.getAQuote().then((quote) => {
+            newUser.favQuote = quote;
+            console.log(newUser.favQuote)
+        })
+
+    } else {
+        newUser.favQuote = {
+            "quote" : quote.value,
+            "author" : author.value
+        }
+    }
+    
+    console.log('new user added')
+    console.log(newUser)
+    return newUser;
+}
+
+
+form.addEventListener('submit', addNewUser);
+
 
 // get the favQuote if missing
-async function addQuote(userObj) {}
+async function addQuote(userObj) {
+    if (!userObj.favQuote) {
+        await Quotes.getAQuote().then((quote) => {
+            console.log(quote);
+            userObj.favQuote = quote;
+        });
+        
+    } else {
+        console.log(userObj.favQuote);
+    }
+}
+
+// Take the new user data from the form and add to page
+
+
+// addQuote()
+
 
 
 async function testPost() {

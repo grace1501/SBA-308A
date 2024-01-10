@@ -1,20 +1,5 @@
 // All functionality with user cards display is in here
 
-/*
-    <div id="users-display" class="display-style">
-        <div>
-            <div class="card" style="width: 12rem;">
-                <h4>User Name</h4>
-                <img src="https://eu.ui-avatars.com/api/?name=John+Doe&size=128" alt="User avatar">
-                <p>Email address</p>
-                <q>Quote line</q>
-                <p>Quote author</p>
-            </div>
-        </div>
-    </div>
-*/
-
-
 // User data to test
 
 const testUser = {
@@ -44,8 +29,9 @@ export function createNewCard(userObj) {
                 <h4>${userObj.first_name} ${userObj.last_name}</h4>
                 <img src="${userObj.avatar}" alt="User avatar">
                 <p>${userObj.email}</p>
+                <h5>Favorite quote:</h5>
                 <q><em>${userObj.favQuote.quote}</em></q>
-                <p>${userObj.favQuote.author}</p>
+                <p>- ${userObj.favQuote.author} -</p>
             </div>`
 
     usersDisplay.prepend(newCard);

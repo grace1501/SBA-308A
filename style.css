@@ -1,5 +1,5 @@
 :root {
-    --main-color: #4e070c;
+    --main-color: #493F93;
     --accent-color: #81b3ff;
     --secondary-color: #f5f8ff ;
     --text-color: #333333;
@@ -18,7 +18,7 @@ body {
 }
 
 h1 {
-    background-color: #4e070c;
+    background-color: var(--main-color);
     color: white;
     padding: 10px;
     border-radius: 4px;
@@ -33,21 +33,14 @@ h2 {
     text-align: center;
 }
 
-button {
+button, .button {
     background-color: var(--accent-color);
     color: var(--text-color);
     padding: 10px;
+    border: 1px solid var(--main-color);
     border-radius: 4px;
     text-align: center;
-}
-
-.button {
-    background-color: var(--accent-color);
-    color: var(--text-color);
-    padding: 10px;
-    border-radius: 4px;
-    text-align: center;
-}
+    }
 
 button:hover {
     opacity: 0.75;
@@ -101,10 +94,12 @@ div {
 }
 
 .card {
-    width: 15rem;
+    width: 20rem;
     text-align: center;
+    font-size: 0.8rem;
     background-color: var(--secondary-color);
-    border: solid 1px var(--accent-color);
+    border: solid 1px var(--main-color);
     border-radius: 8px;
+    text-wrap: wrap;
 }
 
