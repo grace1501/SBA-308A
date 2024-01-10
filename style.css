@@ -96,7 +96,7 @@ div {
 .card {
     width: 20rem;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     background-color: var(--secondary-color);
     border: solid 1px var(--main-color);
     border-radius: 8px;
