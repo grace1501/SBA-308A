@@ -61,7 +61,10 @@ form.addEventListener('submit', (e) => {
     console.log('running');
 
     addNewUser().then((newUserObj) => {
+        // create new user and add the page
         Cards.createNewCard(newUserObj);
+        // send the new user data to reqres api
+        postUserData(newUserObj);
     })
 });
 
@@ -82,17 +85,15 @@ async function addNewUser() {
         // get the favQuote by calling the quote API
         const newQuote = await Quotes.getAQuote();
         newUser.favQuote = newQuote;
-        console.log(newUser.favQuote);
 
     } else {
         newUser.favQuote = {
             "quote" : quote.value,
             "author" : author.value
         }
-        console.log(newUser.favQuote)
     }
-    console.log('new user added')
-    console.log(newUser.favQuote)
+    // console.log('new user added')
+    // console.log(newUser.favQuote)
     return newUser;
 }
 
@@ -109,6 +110,7 @@ async function postUserData(userObj) {
 
     
     const resjson = await response.json();
-    console.log('User data sent')
+    console.log('User data sent. Here is the response:')
+    console.log(resjson);
     return resjson;
 }
