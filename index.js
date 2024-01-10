@@ -4,7 +4,6 @@
 
 import * as Quotes from './Quotes.js';
 import * as Cards from './Cards.js';
-import './Form.js';
 
 // This will fill the page with content when first loaded
 loadPage();
@@ -57,65 +56,51 @@ const quote = form.elements['quote'];
 const author = form.elements['author'];
 
 
-function addNewUser(e) {
+form.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log('running');
+    // make a new user object
+    const newUserObj = addNewUser();
+    console.log(newUserObj)
     
+    // send data to Reqres API via POST method
+    postUserData(newUserObj);
+    // update page to show the newly added user
+    Cards.createNewCard(newUserObj);
+});
+
+
+// Add a new user to the Developer hub by gathering infomations from the form
+function addNewUser() {
+
     const newUser = {
         "email": email.value,
         "first_name": firstName.value,
         "last_name": lastName.value,
     }
 
-    if (quote.value.length < 0) {
+    // if the user did not enter a quote
+    if (quote.value.length <= 0) {
         console.log('No favorite quote - will get you one')
+
+        // get the favQuote by calling the quote API
         Quotes.getAQuote().then((quote) => {
             newUser.favQuote = quote;
-            console.log(newUser.favQuote)
         })
-
     } else {
         newUser.favQuote = {
             "quote" : quote.value,
             "author" : author.value
         }
     }
-    
     console.log('new user added')
-    console.log(newUser)
+    console.log(newUser);
     return newUser;
 }
 
 
-form.addEventListener('submit', addNewUser);
-
-
-// get the favQuote if missing
-async function addQuote(userObj) {
-    if (!userObj.favQuote) {
-        await Quotes.getAQuote().then((quote) => {
-            console.log(quote);
-            userObj.favQuote = quote;
-        });
-        
-    } else {
-        console.log(userObj.favQuote);
-    }
-}
-
-// Take the new user data from the form and add to page
-
-
-// addQuote()
-
-
-
-async function testPost() {
-    let requestBody = { name: "paul rudd",
-    favQuote: {
-        author: "Richard Hamming",
-        quote: "Any unwillingness to learn mathematics today can greatly restrict your possibilities tomorrow."
-    } };
+async function postUserData(userObj) {
+    let requestBody = userObj;
 
     const response = await fetch('https://reqres.in/api/users', 
     {method: 'POST',
@@ -126,7 +111,6 @@ async function testPost() {
 
     
     const resjson = await response.json();
+    console.log('User data sent')
     console.log(resjson);
 }
-
-// testPost();

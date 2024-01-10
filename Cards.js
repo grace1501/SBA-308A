@@ -35,7 +35,7 @@ export function createNewCard(userObj) {
             </div>`
 
     usersDisplay.prepend(newCard);
-    // console.log("Card created");
+    console.log("Card created");
 }
 
 createNewCard(testUser);
