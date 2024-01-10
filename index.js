@@ -59,19 +59,15 @@ const author = form.elements['author'];
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log('running');
-    // make a new user object
-    const newUserObj = addNewUser();
-    console.log(newUserObj)
-    
-    // send data to Reqres API via POST method
-    postUserData(newUserObj);
-    // update page to show the newly added user
-    Cards.createNewCard(newUserObj);
+
+    addNewUser().then((newUserObj) => {
+        Cards.createNewCard(newUserObj);
+    })
 });
 
 
 // Add a new user to the Developer hub by gathering infomations from the form
-function addNewUser() {
+async function addNewUser() {
 
     const newUser = {
         "email": email.value,
@@ -84,17 +80,19 @@ function addNewUser() {
         console.log('No favorite quote - will get you one')
 
         // get the favQuote by calling the quote API
-        Quotes.getAQuote().then((quote) => {
-            newUser.favQuote = quote;
-        })
+        const newQuote = await Quotes.getAQuote();
+        newUser.favQuote = newQuote;
+        console.log(newUser.favQuote);
+
     } else {
         newUser.favQuote = {
             "quote" : quote.value,
             "author" : author.value
         }
+        console.log(newUser.favQuote)
     }
     console.log('new user added')
-    console.log(newUser);
+    console.log(newUser.favQuote)
     return newUser;
 }
 
@@ -112,5 +110,5 @@ async function postUserData(userObj) {
     
     const resjson = await response.json();
     console.log('User data sent')
-    console.log(resjson);
+    return resjson;
 }
